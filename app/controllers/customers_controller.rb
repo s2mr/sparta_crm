@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   def index
+    @customers = Customer.all
   end
 
   def new
@@ -7,21 +8,39 @@ class CustomersController < ApplicationController
   end
 
   def create
+    # @customer = Customer.new(customer_params)
+    # @customer.save  これだと保存できていなくてもshowに飛ばされる
+    # redirect_to @customer
+    
     @customer = Customer.new(customer_params)
-    @customer.save
-    redirect_to @customer
+    if @customer.save
+      redirect_to @customer
+    else
+      render :new
+    end
   end
 
   def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
+    @customer = Customer.new(customer_params)
+    if @customer.update
+      redirect_to @customer
+    else
+      render :edit
+    end
   end
 
   def show
+    @customer = Customer.find(params[:id])
   end
 
   def destroy
+    @customer = Customer.find(params[:id])
+    @customer.destroy
+    redirect_to customers_path
   end
   
   private 
