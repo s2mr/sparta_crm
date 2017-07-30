@@ -7,6 +7,7 @@ class Customer < ApplicationRecord
   validates :company_id, presence: true
 
   belongs_to :company
+  belongs_to :post
 
   def full_name
     family_name + given_name
