@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   before_action :before_action, only: [:edit, :update, :show, :destroy]
   
   def index
-    @q = Customer.includes(:post, :company).ransack(params[:q])
+    @q = Customer.includes(:post, :company, :comments).ransack(params[:q])
     @customers = @q.result.page(params[:page])
   end
 
@@ -36,8 +36,8 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @comment = @customer.comments.build  # 顧客の詳細画面の中でコメントを作成するため
-    @comments = Comment.where(customer_id: @customer.id)
+    @comment = Comment.new customer_id: @customer.id  # 顧客の詳細画面の中でコメントを作成するため
+    @comments = @customer.comments
   end
 
   def destroy

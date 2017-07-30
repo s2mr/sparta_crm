@@ -43,6 +43,12 @@
       <%= f.search_field :post_position_name_cont, class: "form-control input-sm" %>
       </div>
     </div>
+    <div class="col-sm-3 col-xs-12">
+      <div class="form-group">
+      <%= f.label :comments_body_cont, '対応内容' %>
+      <%= f.search_field :comments_body_cont, class: "form-control input-sm" %>
+      </div>
+    </div>
     <div class="row">
       <div class="col-xs-12 text-center">
         <%= f.submit "検索", class: "btn btn-default" %>
@@ -59,6 +65,7 @@
         <th><%= sort_link(@q, :email, "電子メール") %></th>
         <th><%= sort_link(@q, :post_position_name, "役職") %></th>
         <th><%= sort_link(@q, :company_name, "所属会社") %></th>
+        <th><%= sort_link(@q, :comment_cont, "対応件数") %></th>
         <th>リンク</th>
       </thead>
     <tbody>
@@ -69,6 +76,7 @@
           <td><%= customer.email %></td>
           <td><%= customer.post.try(:position_name) %></td>
           <td><%= customer.company.name %></td>
+          <td><%= customer.comments.size %></td>
           <td><%= link_to '詳細', customer, class: "btn btn-default btn-xs" %></td>
         </tr>
       <% end %>

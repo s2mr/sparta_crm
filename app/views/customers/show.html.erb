@@ -15,9 +15,17 @@
     <%= link_to '戻る', customers_path, class: "btn btn-default" %>
     
     <hr>
-    <h1>対応履歴</h1>
+    <h2>対応履歴</h2>
     <% @comments.each do |comment| %>
-      <p><%=comment.body%></p>
+      <div class="media">
+        <div class="media-body">
+          <%= simple_format(comment.body) %>
+          <p class="text-muted">
+            投稿記事:<%= comment.created_at.strftime('%Y-%m-%d %H:%M') %>
+            <%= link_to "削除する", comment_path(comment), method: :delete %>
+          </p>
+        </div>
+      </div>
     <% end %>
     
     <%= form_with model: @comment, url: { controller: :comments, action: :create } do |form| %>
