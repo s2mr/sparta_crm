@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
   validates :company_id, presence: true
+  validates :post_id, presence: true
 
   belongs_to :company
   belongs_to :post
