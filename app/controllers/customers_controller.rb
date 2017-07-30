@@ -1,4 +1,7 @@
 class CustomersController < ApplicationController
+  
+  before_action :before_action, only: [:edit, :update, :show, :destroy]
+  
   def index
     @customers = Customer.page(params[:page])
   end
@@ -21,12 +24,10 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    @customer = Customer.find(params[:id])
   end
 
   def update
-    @customer = Customer.new(customer_params)
-    if @customer.update
+    if @customer.update customer_params
       redirect_to @customer
     else
       render :edit
@@ -34,16 +35,18 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = Customer.find(params[:id])
   end
 
   def destroy
-    @customer = Customer.find(params[:id])
     @customer.destroy
     redirect_to customers_path
   end
   
-  private 
+  private
+  
+  def before_action
+    @customer = Customer.find(params[:id])
+  end
   
   def customer_params
     params.require(:customer).permit(:family_name, :given_name, :email)
