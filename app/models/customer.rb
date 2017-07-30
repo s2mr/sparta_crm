@@ -9,6 +9,7 @@ class Customer < ApplicationRecord
 
   belongs_to :company
   belongs_to :post
+  has_many :comments
 
   def full_name
     family_name + given_name

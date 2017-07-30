@@ -36,6 +36,8 @@ class CustomersController < ApplicationController
   end
 
   def show
+    @comment = @customer.comments.build  # 顧客の詳細画面の中でコメントを作成するため
+    @comments = Comment.where(customer_id: @customer.id)
   end
 
   def destroy

@@ -13,6 +13,22 @@
     </dl>
     <%= link_to '編集', edit_customer_path(@customer), class: "btn btn-default" %>
     <%= link_to '戻る', customers_path, class: "btn btn-default" %>
+    
+    <hr>
+    <h1>対応履歴</h1>
+    <% @comments.each do |comment| %>
+      <p><%=comment.body%></p>
+    <% end %>
+    
+    <%= form_with model: @comment, url: { controller: :comments, action: :create } do |form| %>
+    <hr>
+    <div class="form-group">
+      <%= form.label :body , '対応内容' %><br>
+      <%= form.text_area :body, class: "form-control" %>
+    </div>
+    <%= form.hidden_field :customer_id, value: @customer.id %>
+    <%= form.submit class: "btn btn-default" %>
+    <% end %>
   </div>
   <div class="col-lg-4">
     <div class="thumbnail">
