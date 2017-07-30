@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  
+  before_action :authenticate_user!
   before_action :before_action, only: [:edit, :update, :show, :destroy]
   
   def index
