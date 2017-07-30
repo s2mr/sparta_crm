@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   before_action :before_action, only: [:edit, :update, :show, :destroy]
   
   def index
-    @q = Customer.ransack(params[:q])
+    @q = Customer.includes(:post, :company).ransack(params[:q])
     @customers = @q.result.page(params[:page])
   end
 
