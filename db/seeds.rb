@@ -9,7 +9,7 @@ Faker::Config.locale = :ja
 3.times do |index|
   Company.create(
     name: Faker::Company.name,
-    url: "http://www.test{#index}.co.jp/",
+    url: "http://www.test#{index}.co.jp/",
     address: Faker::Address.city + "12-23#{index}"
   )
 end
